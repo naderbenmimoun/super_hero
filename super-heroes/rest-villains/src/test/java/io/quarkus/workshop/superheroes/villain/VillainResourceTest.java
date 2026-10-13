@@ -11,10 +11,17 @@ class VillainResourceTest {
     @Test
     void testHelloEndpoint() {
         given()
-          .when().get("/api/villains")
+          .when().get("/api/villains/hello")
           .then()
              .statusCode(200)
-             .body(is("Hello from Quarkus REST"));
+             .body(is("Hello Villain Resource"));
     }
-
+    @Test
+    void shouldPingOpenAPI() {
+        given()
+            .header("Accept", "application/json")
+            .when().get("/q/openapi")
+            .then()
+            .statusCode(200);
+    }
 }
