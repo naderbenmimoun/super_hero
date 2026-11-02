@@ -41,15 +41,17 @@ services:
             QUARKUS_REST_CLIENT_HERO_URL: http://rest-heroes:8083
             QUARKUS_REST_CLIENT_VILLAIN_URL: http://rest-villains:8084
             QUARKUS_REST_CLIENT_NARRATION_URL: http://rest-narration:8086
-            KAFKA_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+            KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
     event-statistics:
-        image: quarkus/event-statistics:1.0.0-SNAPSHOT
+        image: naderbm/event-statistics:1.0.0-SNAPSHOT
         container_name: "event-statistics"
+        depends_on:
+            - kafka
         ports:
             - "8085:8085"
         environment:
-            KAFKA_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+            KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
     ui-super-heroes:
         image: naderbm/ui-super-heroes:1.0.0-SNAPSHOT
